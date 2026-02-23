@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./style/main.css">
+  <script src="./js/main.js" defer></script>
+  
+  <title>Frontend Mentor | Typing Speed Test</title>
+
+</head>
+<body>
+<div id="personal-best"> Personal best: <!-- PB --></div>
+<div id="wpm-current">WPM: <!-- WPM --></div>
+<div id="accuracy-current">Accuracy: <!-- Accuracy --></div>
+<div id="time">Time: <!-- Time --></div>
+<div id="difficulty">
+  <label>Difficulty:</label>
+ <select id="select-difficulty" name="select-difficulty">
+    <option value=""></option>
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+</div>
+
+<div id="mode">
+  Mode:
+  <input type="radio" id="mode-selection" name="mode-selection" value="timed" checked> <label for="timed">Timed (60s)</label>
+  <input type="radio" id="mode-selection" name="mode-selection" value="passage"> <label for="passage">Passage</label>
+</div>
+
+<div id="start-test"> <button id="start-test">Start Test</button> </div>
+  <!-- Passage -->
+<div id="tying-area">
+  <span>Start Typing Test Or click the text and start typing</span>
+  <span id="countdown-timer"></span>
+  <div id="generated-text"></div>
+  <div id="user-input-div"><textarea id="user-input" rows="10" cols="200"></textarea></div>
+
+  <!-- Test Complete Start -->
+</div>
+<div id="test-complete" hidden>
+  Test Complete!
+  Solid run. Keep pushing to beat your high score.
+
+  WPM: <!-- WPM -->
+  Accuracy: <!-- Accuracy -->
+  Characters: <!-- Correct/Incorrect -->
+
+  Go Again
+  </div>
+  <!-- Test Complete End -->
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+</body>
+</html>
