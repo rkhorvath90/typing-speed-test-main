@@ -6,8 +6,10 @@ let started = false;
 let splitArray = []
 let testArray = []
 let userInputArray = []
-let mismatches = 0
+let userInputTruthArray = []
 let percentMismatch;
+let rawErrors;
+let prevLength;
 
 const buttonClicked = document.getElementById("start-test")
 const modeSelectionElements = document.querySelectorAll('input[name="mode-selection"]')
@@ -68,20 +70,27 @@ function splitTest (test){
 }
 
 function compareInput (userInput, testInput) {
-    mismatches = 0
-    if (userInput.length !== testInput.length) {
-    console.log("Arrays have different lengths, so all elements count as a difference.");
-} else {
+    userInputTruthArray = []
     for (let i = 0; i < userInput.length; i++) {
         if (userInput[i] !== testInput[i]) {
-            mismatches++;
+            userInputTruthArray.push(false)
+        }
+        if (userInput[i] === testInput[i]) {
+            userInputTruthArray.push(true)
         }
     }
-    
-    return mismatches
+
+    return userInputTruthArray
 }
 
+function findRawErrors (userInput, testInput, prevLength){
+    if(userInput.length > prevLength){
+        if(userInput[userInput.length-1] !== testInput[userInput.length-1]){
+            return rawErrors++
+        }
+    }
 }
+
 
 modeSelectionElements.forEach((element)=> {
     element.addEventListener("change", function(){
@@ -93,34 +102,35 @@ modeSelectionElements.forEach((element)=> {
 
 buttonClicked.addEventListener("click", function (){
     started = true
+    prevLength = 0
+    rawErrors = 0
     const testingArea = document.getElementById("generated-text")
     const difficultySelected = document.getElementById("select-difficulty").value
     const typingTest = getTypingSelection(difficultySelected)
     testingArea.textContent = typingTest
-    console.log(testingArea)
+    //console.log(testingArea)
     testArray = splitTest(typingTest)
-    console.log(testArray)
-    
+    //console.log(testArray)
     const countdown = getCountdown()
     timer = setInterval(() => startTimer(gameType, countdown), 1000)
     
 })
 
 userInput.addEventListener("input", function(){
-    console.log(`User input changed to: ${userInput.value}`)
+    //console.log(`User input changed to: ${userInput.value}`)
     userInputArray = [...userInput.value]
-    console.log(`userInputArray: ${userInputArray}`)
-    console.log(`userInputArray Array length: ${userInputArray.length}`)
-    console.log(`testarray array length: ${testArray.length}`)
-    if(userInputArray.length === testArray.length){
-        let comparison = compareInput(userInputArray, testArray)
-        console.log(`comparison: ${comparison}`)
-        started = false
-        percentMismatch = comparison / testArray.length * 100
-        percentMismatchRounded = parseFloat(percentMismatch.toFixed(2))
-        console.log(`percentMismatch: ${percentMismatchRounded}`)
+    //console.log(`userInputArray: ${userInputArray}`)
+    //console.log(`userInputArray Array length: ${userInputArray.length}`)
+    //console.log(`testarray array length: ${testArray.length}`)
+    const comparison = compareInput(userInputArray, testArray)
+    findRawErrors(userInputArray,testArray,prevLength)
+    //console.log(`comparison: ${comparison}`)
+    percentMismatch = rawErrors / testArray.length * 100
+    const percentMismatchRounded = parseFloat(percentMismatch.toFixed(2))
+    //console.log(`percentMismatch: ${percentMismatchRounded}`)
+    //console.log(`comparison.userInputTruthArray: ${JSON.stringify(comparison.userInputTruthArray)}`)
 
-    }
+    prevLength = userInputArray.length
 })
 
 getData()
