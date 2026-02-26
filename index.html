@@ -15,7 +15,7 @@
 <div id="personal-best"> Personal best: <!-- PB --></div>
 <div id="wpm-current">WPM: <!-- WPM --></div>
 <div id="accuracy-current">Accuracy: <!-- Accuracy --></div>
-<div id="time">Time: <!-- Time --></div>
+<div id="time-current">Time: <!-- Time --></div>
 <div id="difficulty">
   <label>Difficulty:</label>
  <select id="select-difficulty" name="select-difficulty">
@@ -38,7 +38,7 @@
   <span>Start Typing Test Or click the text and start typing</span>
   <span id="countdown-timer"></span>
   <div id="generated-text"></div>
-  <div id="user-input-div"><textarea id="user-input" rows="10" cols="200"></textarea></div>
+  <div id="user-input-div"><textarea id="user-input" rows="10" cols="200" disabled></textarea></div>
 
   <!-- Test Complete Start -->
 </div>
@@ -46,9 +46,9 @@
   Test Complete!
   Solid run. Keep pushing to beat your high score.
 
-  WPM: <!-- WPM -->
-  Accuracy: <!-- Accuracy -->
-  Characters: <!-- Correct/Incorrect -->
+  <div id="wpm-test-complete"></div> 
+  <div id="accuracy-test-complete"></div>
+  <div id="characters-test-complete"></div>
 
   Go Again
   </div>
